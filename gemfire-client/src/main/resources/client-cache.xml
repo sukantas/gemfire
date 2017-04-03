@@ -25,9 +25,9 @@
 	<context:component-scan base-package="com.sukanta.gemfire.services"></context:component-scan>
 	<gfe-data:repositories base-package="com.sukanta.gemfire.repositories"></gfe-data:repositories>
 
- 	<util:properties id="prop">
- 		<prop key="name">gemfirechachTest</prop>
- 		<prop key="jms-manager">true</prop>
+ 	<util:properties id="gemfireProperties">
+ 		<prop key="name">SpringGemFirePeerCacheWithFunction</prop>
+ 		<prop key="jmx-manager">true</prop>
  		<prop key="mcast-port">0</prop>
  	</util:properties>
 

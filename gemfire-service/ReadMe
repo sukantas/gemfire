@@ -1,0 +1,65 @@
+
+E:\Software\pivotal-gemfire-9.0.2\gemfireprofile>gfsh
+    _________________________     __
+   / _____/ ______/ ______/ /____/ /
+  / /  __/ /___  /_____  / _____  /
+ / /__/ / ____/  _____/ / /    / /
+/______/_/      /______/_/    /_/    9.0.2
+
+Monitor and Manage Pivotal GemFire
+gfsh>start locator --name=test-locator
+Starting a Geode Locator in E:\Software\pivotal-gemfire-9.0.2\gemfireprofile\test-locator...
+..
+Locator in E:\Software\pivotal-gemfire-9.0.2\gemfireprofile\test-locator on Suku[10334] as test-locator is currently online.
+Process ID: 10108
+Uptime: 1 minute 1 second
+GemFire Version: 9.0.2
+Java Version: 1.8.0_111
+Log File: E:\Software\pivotal-gemfire-9.0.2\gemfireprofile\test-locator\test-locator.log
+JVM Arguments: -Dgemfire.enable-cluster-configuration=true -Dgemfire.load-cluster-configuration-from-dir=false -Dgemfire.launcher.registerSignalHandlers=true -Djava.awt.headless=true -D
+sun.rmi.dgc.server.gcInterval=9223372036854775806
+Class-Path: E:\Software\pivotal-gemfire-9.0.2\lib\geode-core-9.0.2.jar;E:\Software\pivotal-gemfire-9.0.2\lib\geode-dependencies.jar
+
+Successfully connected to: JMX Manager [host=Suku, port=1099]
+
+Cluster configuration service is up and running.
+
+gfsh>start server --name=test-server
+Starting a Geode Server in E:\Software\pivotal-gemfire-9.0.2\gemfireprofile\test-server...
+..
+Server in E:\Software\pivotal-gemfire-9.0.2\gemfireprofile\test-server on Suku[40404] as test-server is currently online.
+Process ID: 5548
+Uptime: 1 minute 1 second
+GemFire Version: 9.0.2
+Java Version: 1.8.0_111
+Log File: E:\Software\pivotal-gemfire-9.0.2\gemfireprofile\test-server\test-server.log
+JVM Arguments: -Dgemfire.default.locators=192.168.1.5[10334] -Dgemfire.use-cluster-configuration=true -Dgemfire.start-dev-rest-api=false -XX:OnOutOfMemoryError=taskkill /F /PID %p -Dgem
+fire.launcher.registerSignalHandlers=true -Djava.awt.headless=true -Dsun.rmi.dgc.server.gcInterval=9223372036854775806
+Class-Path: E:\Software\pivotal-gemfire-9.0.2\lib\geode-core-9.0.2.jar;E:\Software\pivotal-gemfire-9.0.2\lib\geode-dependencies.jar
+
+gfsh>connect
+Already connected to: Suku[1099]
+
+gfsh>list members
+    Name     | Id
+------------ | ----------------------------------------------------
+test-locator | 192.168.1.5(test-locator:10108:locator)<ec><v0>:1024
+test-server  | 192.168.1.5(test-server:5548)<v1>:1025
+
+gfsh>list regions
+List of regions
+---------------
+test-region
+
+gfsh>create region --name=Student --type=REPLICATE
+  Member    | Status
+----------- | ------------------------------------------
+test-server | Region "/Student" created on "test-server"
+
+gfsh>list regions
+List of regions
+---------------
+Student
+test-region
+
+>deploy --jar=C:\\Users\\Sukanta_2\\git\\gemfire-client\\target\\gemfire-client-0.0.1-SNAPSHOT.jar
